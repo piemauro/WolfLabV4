@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { X, Send, Mic, MicOff, Volume2, Loader2, ChevronRight } from 'lucide-react';
+import { X, Send, Mic, MicOff, Loader2, ChevronRight } from 'lucide-react';
 import { Product } from '../types';
 import { askLobinho, getLobinhoGreeting, ChatMessage } from '../services/lobinho';
 

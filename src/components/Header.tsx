@@ -1,4 +1,4 @@
-import { Activity, GitCompare, MessageCircle } from 'lucide-react';
+import { Activity, GitCompare } from 'lucide-react';
 
 interface HeaderProps {
   onFinderClick: () => void;

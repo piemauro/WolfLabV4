@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import {
   X, Play, Pause, RotateCcw, Flag, Smartphone,
   Activity, Zap, Timer, TrendingUp, Award,
-  ChevronUp, ChevronDown, Footprints, Gauge
+  Footprints, Gauge
 } from 'lucide-react';
 import { Product } from '../types';
 
