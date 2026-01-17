@@ -1,4 +1,4 @@
-import { Product, Category } from '../types';
+import { Product, Category, Brand } from '../types';
 
 // --- CORES DA MARCA WOLF ---
 export const THEME = {
@@ -21,11 +21,21 @@ export const CATEGORIES: Category[] = [
   { id: 'estabilidade', label: 'Estabilidade' },
 ];
 
+// --- MARCAS ---
+export const BRANDS: Brand[] = [
+  { id: 'todas', name: 'Todas' },
+  { id: 'wolf', name: 'Wolf Lab' },
+  { id: 'nimbus', name: 'Nimbus' },
+  { id: 'mach', name: 'Mach' },
+  { id: 'kayano', name: 'Kayano' },
+];
+
 // --- DADOS DOS PRODUTOS ---
 export const PRODUCTS: Product[] = [
   {
     id: 'elite-1',
     name: 'Wolf Alphaflyer Elite',
+    brand: 'wolf',
     subhead: 'O Quebrador de Recordes',
     category: 'elite',
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1000',
@@ -44,6 +54,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'rodagem-1',
     name: 'Nimbus Cloud Max',
+    brand: 'nimbus',
     subhead: 'Rodagem de Luxo',
     category: 'rodagem',
     image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1000',
@@ -61,6 +72,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'velocidade-1',
     name: 'Mach Speed 4',
+    brand: 'mach',
     subhead: 'Treinos de Ritmo',
     category: 'velocidade',
     image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1000',
@@ -78,6 +90,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'estabilidade-1',
     name: 'Kayano Guard 30',
+    brand: 'kayano',
     subhead: 'Suporte Inteligente',
     category: 'estabilidade',
     image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&q=80&w=1000',
@@ -95,6 +108,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'elite-2',
     name: 'Wolf Prototype X',
+    brand: 'wolf',
     subhead: 'Conceito Ilegal',
     category: 'elite',
     image: 'https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&q=80&w=1000',
@@ -113,6 +127,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'velocidade-2',
     name: 'Wolf Tempo Pro',
+    brand: 'wolf',
     subhead: 'Velocidade Diária',
     category: 'velocidade',
     image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=1000',

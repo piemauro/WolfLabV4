@@ -83,9 +83,11 @@ wolflab/
 │   │   ├── CompareSuggestions.tsx # Sugestões ao comparar
 │   │   ├── Lobinho.tsx          # Assistente IA (v3)
 │   │   ├── RunTimer.tsx         # Cronômetro inteligente (v4)
+│   │   ├── UserProfile.tsx      # Perfil + Gamificação (v5)
 │   │   └── StatBar.tsx          # Barra de atributo
 │   ├── services/
-│   │   └── lobinho.ts           # Integração OpenAI (v3)
+│   │   ├── lobinho.ts           # Integração OpenAI (v3)
+│   │   └── storage.ts           # localStorage (v5)
 │   ├── data/
 │   │   └── products.ts          # Produtos + Tema
 │   ├── types/
@@ -210,6 +212,12 @@ Ver **[PRODUCT_TEMPLATE.md](./PRODUCT_TEMPLATE.md)** para guia completo.
 
 ## Changelog
 
+### v5.0.0 — 17 Jan 2026
+**Filtros por Marca**
+- Filtro por **Marca** (Wolf Lab, Nimbus, Mach, Kayano)
+- Filtros combinados (categoria + marca)
+- Campo `brand` adicionado aos produtos
+
 ### v4.0.0 — 17 Jan 2026
 **Cronômetro Inteligente - Testar na Esteira**
 - ✅ Cronômetro com sensores do celular (DeviceMotion API)
@@ -291,12 +299,15 @@ Ver **[PRODUCT_TEMPLATE.md](./PRODUCT_TEMPLATE.md)** para guia completo.
 
 | Feature | Status |
 |---------|--------|
-| Assistente IA (Lobinho) | ✅ v3.0.0 |
-| Cronômetro Inteligente | ✅ v4.0.0 |
-| Visualizador 3D (Three.js) | 🔮 Planejado |
-| PWA (offline) | 🔮 Planejado |
-| Integração GPS real | 🔮 Planejado |
-| Mais produtos | 🔄 Contínuo |
+| Assistente IA (Lobinho) | v3.0.0 |
+| Cronometro Inteligente | v4.0.0 |
+| Filtros por Marca | v5.0.0 |
+| Perfil + Gamificacao | Planejado (V6) |
+| Backend + Sincronizacao | Planejado (V7) |
+| GPS + Mapas | Planejado (V8) |
+| PWA (offline) | Planejado (V9) |
+| Integracoes Externas | Planejado (V10) |
+| Visualizacao 3D | Planejado (V11) |
 
 ---
 
@@ -307,4 +318,4 @@ Engenharia para sua performance.
 
 ---
 
-*Última atualização: 17 Jan 2026 — v4.0.0*
+*Última atualização: 17 Jan 2026 — v5.0.0*

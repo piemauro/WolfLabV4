@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Product, ViewType } from './types';
-import { PRODUCTS, CATEGORIES } from './data/products';
+import { PRODUCTS, CATEGORIES, BRANDS } from './data/products';
 import { Header } from './components/Header';
 import { ProductCard } from './components/ProductCard';
 import { ProductModal } from './components/ProductModal';
@@ -14,6 +14,7 @@ export default function App() {
   const [view, setView] = useState<ViewType>('catalog');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [filter, setFilter] = useState('todos');
+  const [brandFilter, setBrandFilter] = useState('todas');
   const [isLoading, setIsLoading] = useState(true);
   const [compareList, setCompareList] = useState<Product[]>([]);
   const [recommendedCategory, setRecommendedCategory] = useState<string | null>(null);
@@ -34,11 +35,14 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Filtrar produtos
+  // Filtrar produtos por categoria e marca
   const filteredProducts = useMemo(() => {
-    if (filter === 'todos') return PRODUCTS;
-    return PRODUCTS.filter(p => p.category === filter);
-  }, [filter]);
+    return PRODUCTS.filter(p => {
+      const matchCategory = filter === 'todos' || p.category === filter;
+      const matchBrand = brandFilter === 'todas' || p.brand === brandFilter;
+      return matchCategory && matchBrand;
+    });
+  }, [filter, brandFilter]);
 
   // Handler para resultado do Finder
   const handleFinderResult = (category: string) => {
@@ -86,6 +90,7 @@ export default function App() {
   // Reset filters
   const handleLogoClick = () => {
     setFilter('todos');
+    setBrandFilter('todas');
     setView('catalog');
     setRecommendedCategory(null);
   };
@@ -158,26 +163,47 @@ export default function App() {
               </div>
             )}
 
-            {/* CATEGORY TABS */}
-            <nav
-              className="flex gap-3 overflow-x-auto pb-6 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:justify-center sticky top-20 md:top-24 z-30 bg-[#050a14]/95 pt-2 backdrop-blur-xl"
-              aria-label="Categorias"
-            >
-              {CATEGORIES.map(cat => (
-                <button
-                  key={cat.id}
-                  onClick={() => setFilter(cat.id)}
-                  className={`whitespace-nowrap px-5 py-2 md:px-6 md:py-2.5 rounded-full text-xs font-bold uppercase tracking-wide transition-all active:scale-95 hover:scale-105 ${
-                    filter === cat.id
-                      ? 'bg-[#8CC63F] text-[#050a14] shadow-[0_0_15px_rgba(140,198,63,0.4)] scale-105'
-                      : 'bg-[#0B162A] border border-white/5 text-gray-400 hover:border-[#8CC63F]/50 hover:text-white'
-                  }`}
-                  aria-pressed={filter === cat.id}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </nav>
+            {/* FILTERS */}
+            <div className="sticky top-20 md:top-24 z-30 bg-[#050a14]/95 pt-2 pb-4 backdrop-blur-xl space-y-3">
+              {/* CATEGORY TABS */}
+              <nav
+                className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:justify-center"
+                aria-label="Categorias"
+              >
+                {CATEGORIES.map(cat => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setFilter(cat.id)}
+                    className={`whitespace-nowrap px-5 py-2 md:px-6 md:py-2.5 rounded-full text-xs font-bold uppercase tracking-wide transition-all active:scale-95 hover:scale-105 ${
+                      filter === cat.id
+                        ? 'bg-[#8CC63F] text-[#050a14] shadow-[0_0_15px_rgba(140,198,63,0.4)] scale-105'
+                        : 'bg-[#0B162A] border border-white/5 text-gray-400 hover:border-[#8CC63F]/50 hover:text-white'
+                    }`}
+                    aria-pressed={filter === cat.id}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </nav>
+
+              {/* BRAND FILTER */}
+              <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:justify-center">
+                <span className="text-[10px] text-gray-500 uppercase font-bold self-center mr-1">Marca:</span>
+                {BRANDS.map(brand => (
+                  <button
+                    key={brand.id}
+                    onClick={() => setBrandFilter(brand.id)}
+                    className={`whitespace-nowrap px-3 py-1.5 rounded-full text-[10px] font-bold transition-all ${
+                      brandFilter === brand.id
+                        ? 'bg-white/20 text-white border border-white/30'
+                        : 'bg-transparent border border-white/10 text-gray-500 hover:text-white hover:border-white/20'
+                    }`}
+                  >
+                    {brand.name}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* PRODUCT GRID - 1 col mobile, 2 cols tablet, 3 cols desktop */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-12">
@@ -194,12 +220,15 @@ export default function App() {
 
               {filteredProducts.length === 0 && (
                 <div className="col-span-full text-center py-12">
-                  <p className="text-gray-500">Nenhum modelo encontrado nesta categoria.</p>
+                  <p className="text-gray-500">Nenhum modelo encontrado com esses filtros.</p>
                   <button
-                    onClick={() => setFilter('todos')}
+                    onClick={() => {
+                      setFilter('todos');
+                      setBrandFilter('todas');
+                    }}
                     className="mt-4 text-[#8CC63F] font-bold underline hover:no-underline"
                   >
-                    Ver todos
+                    Limpar filtros
                   </button>
                 </div>
               )}
